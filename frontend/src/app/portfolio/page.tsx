@@ -83,7 +83,7 @@ export default function PortfolioPage() {
                 const json = await res.json();
                 const modified = json.map((stock: Stock) => ({
                     ...stock,
-                    sector: sectorMap[stock.name] || 'Others',
+                    sector: sectorMap[stock?.name] || 'Others',
                 }));
 
                 if (!isMounted) return; //check 
@@ -245,7 +245,7 @@ export default function PortfolioPage() {
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart
                                     data={filteredData.map(stock => ({
-                                        name: stock.name,
+                                        name: stock?.name,
                                         investment: stock.purchasePrice * stock.quantity,
                                         presentValue: stock.cmp * stock.quantity,
                                         gainLoss: (stock.cmp - stock.purchasePrice) * stock.quantity
