@@ -77,6 +77,8 @@ export default function PortfolioPage() {
         let isMounted = true;
         const fetchData = async () => {
             try {
+                console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stocks \n`)
+                 console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
                 const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/stocks`); // fetch is called in api/stocks/route
                 const json = await res.json();
                 const modified = json.map((stock: Stock) => ({
