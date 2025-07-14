@@ -40,7 +40,7 @@ A real-time stock portfolio dashboard built with **Next.js**, **Node.js**, and *
 
 ```bash
 git clone https://github.com/your-username/Portfolio-Dashboard.git
-cd Portfolio-Dashboard
+cd Portfolio-Dashboard ```
 
 
 
