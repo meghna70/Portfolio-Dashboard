@@ -3,10 +3,14 @@ const express = require('express');
 const yahooFinance = require('yahoo-finance2').default;
 
 const path = require('path');
-const axios = require('axios');
+const axios = require('axios')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://portfolio-dashboar.netlify.app' // your frontend URL
+}));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
