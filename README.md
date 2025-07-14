@@ -44,13 +44,14 @@ A real-time stock portfolio dashboard built with **Next.js**, **Node.js**, and *
 <img width="1652" height="844" alt="Screenshot 2025-07-14 050758" src="https://github.com/user-attachments/assets/1b85f835-c29a-4658-a96b-c6d520d6b971" />
 
 ---
-## ⚙️ Setup Instructions
 
-### 1. Clone the Repo
+## 💻 Getting Started
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/Portfolio-Dashboard.git
-cd Portfolio-Dashboard ```
-
+cd Portfolio-Dashboard`
+The backend runs at http://localhost:3001
 
 
