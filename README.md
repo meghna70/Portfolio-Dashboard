@@ -34,6 +34,16 @@ A real-time stock portfolio dashboard built with **Next.js**, **Node.js**, and *
 
 ---
 
+<img width="1687" height="738" alt="Screenshot 2025-07-14 050748" src="https://github.com/user-attachments/assets/16a8bb90-cfef-4796-9bb8-a0ff01bbe45f" />
+
+
+<img width="1769" height="808" alt="Screenshot 2025-07-14 050736" src="https://github.com/user-attachments/assets/5029cdd5-88e2-4ce8-8b4b-69b42b7faa24" />
+
+
+
+<img width="1652" height="844" alt="Screenshot 2025-07-14 050758" src="https://github.com/user-attachments/assets/1b85f835-c29a-4658-a96b-c6d520d6b971" />
+
+---
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repo
@@ -44,11 +54,3 @@ cd Portfolio-Dashboard ```
 
 
 
-<img width="1687" height="738" alt="Screenshot 2025-07-14 050748" src="https://github.com/user-attachments/assets/16a8bb90-cfef-4796-9bb8-a0ff01bbe45f" />
-
-
-<img width="1769" height="808" alt="Screenshot 2025-07-14 050736" src="https://github.com/user-attachments/assets/5029cdd5-88e2-4ce8-8b4b-69b42b7faa24" />
-
-
-
-<img width="1652" height="844" alt="Screenshot 2025-07-14 050758" src="https://github.com/user-attachments/assets/1b85f835-c29a-4658-a96b-c6d520d6b971" />
