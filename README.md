@@ -38,8 +38,7 @@ A real-time stock portfolio dashboard built with **Next.js**, **Node.js**, and *
 
 ### 1. Clone the Repo
 
-```bash<img width="1769" height="808" alt="Screenshot 2025-07-14 050736" src="https://github.com/user-attachments/assets/319a3c9d-007b-4a2e-a307-ffe02943e9fa" />
-
+```bash
 git clone https://github.com/your-username/Portfolio-Dashboard.git
 cd Portfolio-Dashboard
 
@@ -48,5 +47,3 @@ cd Portfolio-Dashboard
 ![Uploading Screenshot 2025-07-14 050736.png…]()
 <img width="1687" height="738" alt="Screenshot 2025-07-14 050748" src="https://github.com/user-attachments/assets/7c469f7b-13b4-4901-bae3-f0bcd90eb176" />
 
-git clone https://github.com/your-username/Portfolio-Dashboard.git
-cd Portfolio-Dashboard
