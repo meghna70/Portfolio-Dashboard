@@ -4,8 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* === Portfolio Dashboard Layout ===
-.dashboard-main {
+/* .dashboard-main {
   @apply p-6 bg-[#f9fafb] min-h-screen;
 }
 
@@ -15,7 +14,5 @@
 
 .dashboard-title {
   @apply text-3xl font-bold text-gray-800;
-}
+} */
 
-/* === Sector Filter Buttons === */
-/* /
