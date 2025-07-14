@@ -9,15 +9,14 @@ import {
 } from '@tanstack/react-table';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, XAxis, YAxis, Bar, CartesianGrid } from 'recharts';
 import { Stock } from '@/types/stock';
-import Link from 'next/link';
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7f50', '#00c49f', '#0088fe', '#ffbb28'];
+//Adding different colors to the entioned sectors
+const COLORS = ["e29578", "8ecae6", "83c5be", "006d77", "ffddd2"]
 
 export default function PortfolioPage() {
     const [data, setData] = useState<Stock[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedSector, setSelectedSector] = useState<string>('All');
-
+   
     const sectorMap: Record<string, string> = {
         'HDFC Bank': 'Financial Sector',
         'Bajaj Finance': 'Financial Sector',
@@ -46,40 +45,47 @@ export default function PortfolioPage() {
         'SBI Life': 'Others',
     };
 
-    const totalInvestment = data.reduce((sum, stock) => sum + stock.purchasePrice * stock.quantity, 0);
+    const [selectedSector, setSelectedSector] = useState<string>('All');
+
+    const totalInvestment = data?.reduce((sum, stock) => sum + stock.purchasePrice * stock.quantity, 0);
 
     const sectors: string[] = useMemo(() => {
         const uniqueSectors = Array.from(new Set(data.map((d: Stock) => d.sector)));
         return ['All', ...uniqueSectors];
     }, [data]);
+    // to find unique sectors in case of user inputs
 
-    const filteredData: Stock[] = useMemo(() => {
+    // FILTERS
+    const filteredData: Stock[] = useMemo(() => { // using use memo  
         return selectedSector === 'All' ? data : data.filter((d: Stock) => d.sector === selectedSector);
     }, [data, selectedSector]);
 
+    //PIE DATA
     const pieData = useMemo(() => {
         return data.reduce((acc: { name: string; value: number }[], stock: Stock) => {
-            const existing = acc.find(s => s.name === stock.sector);
+
+            const existing_rec = acc.find(s => s.name === stock.sector);
             const inv = stock.purchasePrice * stock.quantity;
-            if (existing) existing.value += inv;
+            if (existing_rec) existing_rec.value += inv;
             else acc.push({ name: stock.sector, value: inv });
             return acc;
         }, []);
+
     }, [data]);
 
     useEffect(() => {
         let isMounted = true;
         const fetchData = async () => {
             try {
-                const res = await fetch('/api/stocks');
+                const res = await fetch('/api/stocks'); // fetch is called in api/stocks/route
                 const json = await res.json();
-                const enriched = json.map((stock: Stock) => ({
+                const modified = json.map((stock: Stock) => ({
                     ...stock,
                     sector: sectorMap[stock.name] || 'Others',
                 }));
 
-                if (!isMounted) return;
-                setData(enriched);
+                if (!isMounted) return; //check 
+                setData(modified);
                 setIsLoading(false);
             } catch (e) {
                 console.error(e);
@@ -93,11 +99,14 @@ export default function PortfolioPage() {
             isMounted = false;
             clearInterval(interval);
         };
+        //every 15 secs 
     }, []);
 
 
     const sectorSummary = useMemo(() => {
+
         const summary: Record<string, { investment: number; presentValue: number; gainLoss: number }> = {};
+
         data.forEach(stock => {
             const investment = stock.purchasePrice * stock.quantity;
             const presentValue = stock.cmp * stock.quantity;
@@ -111,6 +120,12 @@ export default function PortfolioPage() {
             summary[sector].gainLoss += gainLoss;
         });
         return summary;
+
+        //sector calculation 
+
+        //presentValue = CMP * QUANT
+        // investment = purchase price at the time * quant
+    
     }, [data]);
 
     console.log("sectorSummary", sectorSummary)
@@ -122,13 +137,11 @@ export default function PortfolioPage() {
             cell: info => {
                 const stockName = info.getValue<string>();
                 return (
-                    // <Link href={`/portfolio/${encodeURIComponent(stockName)}`} style={{ color: 'blue', textDecoration: 'underline', fontWeight: '500' }}>
-                        {stockName}
-                    // </Link>
+                       {stockName}
                 );
             },
         },
-        { header: 'Buy ₹', accessorKey: 'purchasePrice' },
+        { header: 'Purchase price', accessorKey: 'purchasePrice' },
         { header: 'Qty', accessorKey: 'quantity' },
         {
             header: 'Investment',
@@ -313,7 +326,7 @@ export default function PortfolioPage() {
                     }}>
                         {isLoading ? (
                             <div>
-                                {[...Array(6)].map((_, idx) => (
+                                {[...Array(6)].map((item, idx) => (
                                     <div key={idx} style={{ ...skeletonStyle, height: '32px', marginBottom: '12px' }} />
                                 ))}
                             </div>

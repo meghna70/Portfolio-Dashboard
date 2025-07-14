@@ -2,8 +2,8 @@
 
 import "../styles/globals.css"
 export const metadata = {
-  title: 'Stock Portfolio Tracker',
-  description: 'Track your stocks in real-time with CMP, P/E, and more.',
+  title: ' Portfolio Dashboard',
+  description: '',
 };
 
 

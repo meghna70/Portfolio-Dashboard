@@ -1,6 +1,8 @@
 // src/app/page.tsx
 import Link from 'next/link';
 
+//not used as the default link opens up /portfolio
+
 export default function HomePage() {
   return (
     <main style={{ fontFamily:"Poppins"}} className="p-6">
