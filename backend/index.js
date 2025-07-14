@@ -8,9 +8,7 @@ const axios = require('axios')
 const app = express();
 const PORT = process.env.PORT || 3001;
 const cors = require('cors');
-app.use(cors({
-  origin: 'https://portfolio-dashboar.netlify.app' // your frontend URL
-}));
+app.use(cors());
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -115,8 +113,8 @@ async function getFinancialData(yahooSymbol, googleSymbol) {
       modules: ['defaultKeyStatistics', 'financialData'],
       fetchOptions
     });
-    console.log("summary", summary)
-    console.log("quote", quote)
+    // console.log("summary", summary)
+    // console.log("quote", quote)
 
     let cmp = 0;
     let peRatio = 0;

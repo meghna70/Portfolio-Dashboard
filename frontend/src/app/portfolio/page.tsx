@@ -11,7 +11,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, XA
 import { Stock } from '@/types/stock';
 
 //Adding different colors to the entioned sectors
-const COLORS = ["e29578", "8ecae6", "83c5be", "006d77", "ffddd2"]
+const COLORS = ["#e29578", "#8ecae6", "#83c5be", "#006d77", "#ffddd2", "#facf93"]
 
 export default function PortfolioPage() {
     const [data, setData] = useState<Stock[]>([]);
@@ -50,19 +50,19 @@ export default function PortfolioPage() {
     const totalInvestment = data?.reduce((sum, stock) => sum + stock.purchasePrice * stock.quantity, 0);
 
     const sectors: string[] = useMemo(() => {
-        const uniqueSectors = Array.from(new Set(data.map((d: Stock) => d.sector)));
+        const uniqueSectors = Array.from(new Set(data?.map((d: Stock) => d.sector)));
         return ['All', ...uniqueSectors];
     }, [data]);
     // to find unique sectors in case of user inputs
 
     // FILTERS
     const filteredData: Stock[] = useMemo(() => { // using use memo  
-        return selectedSector === 'All' ? data : data.filter((d: Stock) => d.sector === selectedSector);
+        return selectedSector === 'All' ? data : data?.filter((d: Stock) => d.sector === selectedSector);
     }, [data, selectedSector]);
 
     //PIE DATA
     const pieData = useMemo(() => {
-        return data.reduce((acc: { name: string; value: number }[], stock: Stock) => {
+        return data?.reduce((acc: { name: string; value: number }[], stock: Stock) => {
 
             const existing_rec = acc.find(s => s.name === stock.sector);
             const inv = stock.purchasePrice * stock.quantity;
@@ -109,7 +109,7 @@ export default function PortfolioPage() {
 
         const summary: Record<string, { investment: number; presentValue: number; gainLoss: number }> = {};
 
-        data.forEach(stock => {
+        data?.forEach(stock => {
             const investment = stock.purchasePrice * stock.quantity;
             const presentValue = stock.cmp * stock.quantity;
             const gainLoss = presentValue - investment;
@@ -137,9 +137,9 @@ export default function PortfolioPage() {
             header: 'Stock',
             accessorKey: 'name',
             cell: info => {
-                const stockName = info.getValue<string>();
+                const stockName = info?.getValue<string>();
                 return (
-                       {stockName}
+                       <p>{stockName}</p>
                 );
             },
         },
@@ -148,25 +148,25 @@ export default function PortfolioPage() {
         {
             header: 'Investment',
             accessorFn: row => row.purchasePrice * row.quantity,
-            cell: info => `₹${info.getValue<number>()?.toFixed(2)}`,
+            cell: info => `₹${info?.getValue<number>().toFixed(2)}`,
         },
         {
             header: 'Portfolio %',
             accessorFn: row => (row.purchasePrice * row.quantity * 100) / totalInvestment,
-            cell: info => `${info.getValue<number>().toFixed(2)}%`,
+            cell: info => `${info?.getValue<number>().toFixed(2)}%`,
         },
         { header: 'Exchange', accessorKey: 'exchange' },
         { header: 'CMP', accessorKey: 'cmp' },
         {
             header: 'Present Value',
             accessorFn: row => row.cmp * row.quantity,
-            cell: info => `₹${info.getValue<number>()?.toFixed(2)}`,
+            cell: info => `₹${info?.getValue<number>().toFixed(2)}`,
         },
         {
             header: 'Gain/Loss',
             accessorFn: row => (row.cmp * row.quantity) - (row.purchasePrice * row.quantity),
             cell: info => {
-                const value = info.getValue<number>();
+                const value = info?.getValue<number>();
                 return <span style={{ color: value >= 0 ? 'green' : 'red' }}>₹{value.toFixed(2)}</span>;
             },
         },
@@ -203,7 +203,7 @@ export default function PortfolioPage() {
                     📊 Portfolio Dashboard
                 </h1>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '20px' }}>
-                    {sectors.map(sector => (
+                    {sectors?.map(sector => (
                         <button
                             key={sector}
                             onClick={() => setSelectedSector(sector)}
@@ -306,7 +306,7 @@ export default function PortfolioPage() {
                                     fill="#8884d8"
                                     label
                                 >
-                                    {pieData.map((entry, index) => (
+                                    {pieData?.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Pie>

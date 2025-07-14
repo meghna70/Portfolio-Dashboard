@@ -4,12 +4,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(_req: NextRequest) {
   try {
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:3001';
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
     const response = await fetch(`${backendUrl}/api/stocks`, {
       next: { revalidate: 0 }, // force fresh fetch if needed
     });
 
-    if (!response.ok) {
+    if (!response?.ok) {
       throw new Error(`Backend fetch failed: ${response.statusText}`);
     }
 
