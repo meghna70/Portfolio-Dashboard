@@ -149,17 +149,13 @@ async function getFinancialData(yahooSymbol, googleSymbol) {
 // API endpoint
 app.get('/api/stocks', async (_req, res) => {
   try {
-    const enriched = [];
-
-    for (const stock of stocks) {
-      const { cmp, peRatio, earnings } = await getFinancialData(stock.yahooSymbol, stock.googleSymbol);
-
-      const totalEarnings = earnings * stock.quantity;
-
-
-      enriched.push({ ...stock, cmp, peRatio, earnings: totalEarnings });
-      await delay(300); // delay to avoid spam
-    }
+    const enriched = await Promise.all(
+      stocks.map(async (stock) => {
+        const { cmp, peRatio, earnings } = await getFinancialData(stock.yahooSymbol, stock.googleSymbol);
+        const totalEarnings = earnings * stock.quantity;
+        return { ...stock, cmp, peRatio, earnings: totalEarnings };
+      })
+    );
 
     res.json(enriched);
   } catch (err) {
@@ -167,6 +163,7 @@ app.get('/api/stocks', async (_req, res) => {
     res.status(500).json({ error: 'Failed to fetch stock data' });
   }
 });
+
 
 app.listen(PORT, () => {
   console.log(` Server running at http://localhost:${PORT}`);
