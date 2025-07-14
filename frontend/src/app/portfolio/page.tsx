@@ -122,9 +122,9 @@ export default function PortfolioPage() {
             cell: info => {
                 const stockName = info.getValue<string>();
                 return (
-                    <Link href={`/portfolio/${encodeURIComponent(stockName)}`} style={{ color: 'blue', textDecoration: 'underline', fontWeight: '500' }}>
+                    // <Link href={`/portfolio/${encodeURIComponent(stockName)}`} style={{ color: 'blue', textDecoration: 'underline', fontWeight: '500' }}>
                         {stockName}
-                    </Link>
+                    // </Link>
                 );
             },
         },
