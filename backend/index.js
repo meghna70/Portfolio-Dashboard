@@ -164,6 +164,10 @@ app.get('/api/stocks', async (_req, res) => {
   }
 });
 
+app.get('/', (_req, res) => {
+  res.send('🚀 Backend is up and running!');
+});
+
 
 app.listen(PORT,'0.0.0.0', () => {
   console.log(` Server running at http://localhost:${PORT}`);
